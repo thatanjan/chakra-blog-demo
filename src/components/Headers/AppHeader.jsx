@@ -1,11 +1,25 @@
-import { Flex, Spacer, Box, IconButton } from '@chakra-ui/react'
-
-import Logo from '@/components/Logos/Logo'
+import dynamic from 'next/dynamic'
+import { Flex, Spacer, Box, IconButton, useDisclosure } from '@chakra-ui/react'
 
 import { HamburgerIcon, SearchIcon } from '@chakra-ui/icons'
 
-const CustomIconButton = ({ Icon }) => {
-	return <IconButton size='lg' icon={<Icon />} ml='1rem' />
+import Logo from '@/components/Logos/Logo'
+
+const CustomIconButton = ({ Icon, ...props }) => {
+	return <IconButton size='lg' icon={<Icon />} ml='1rem' {...props} />
+}
+
+const AppDrawer = dynamic(() => import('@/components/Drawers/AppDrawer'))
+
+const HamburgerNav = () => {
+	const { isOpen, onOpen, onClose } = useDisclosure()
+	return (
+		<>
+			<CustomIconButton Icon={HamburgerIcon} onClick={onOpen} />
+
+			{isOpen && <AppDrawer isOpen={isOpen} onClose={onClose} />}
+		</>
+	)
 }
 
 const AppHeader = () => {
@@ -21,7 +35,7 @@ const AppHeader = () => {
 					<Logo />
 					<Spacer />
 					<CustomIconButton Icon={SearchIcon} />
-					<CustomIconButton Icon={HamburgerIcon} />
+					<HamburgerNav />
 				</Flex>
 			</Box>
 		</>
