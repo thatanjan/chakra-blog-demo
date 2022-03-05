@@ -11,11 +11,15 @@ const breakpoints = createBreakpoints({
 const styles = {
 	global: () => ({
 		html: {
-			fontSize: '62.5%',
+			// fontSize: '62.5%',
 		},
 	}),
 }
 
-const theme = extendTheme({ styles, breakpoints })
+const config = {
+	initialColorMode: 'dark',
+}
+
+const theme = extendTheme({ styles, breakpoints, config })
 
 export default theme

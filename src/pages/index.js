@@ -1,11 +1,11 @@
 import React from 'react'
 
-import Hello from '@/components/Hello'
+import BlogPreviewList from '@/components/Blog/BlogPreviewList'
 
 const Index = () => {
 	return (
 		<div>
-			<Hello />
+			<BlogPreviewList />
 		</div>
 	)
 }
