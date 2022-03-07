@@ -7,15 +7,22 @@ import BlogPreviewList from '@/components/Blog/BlogPreviewList'
 import getFiles from '@/utils/getFiles'
 import readBlogFiles from '@/utils/readBlogFiles'
 
-const Index = () => {
+import Blog from '@/mongoose/Models/Blog'
+import connectDB from '@/mongoose/connectDB'
+
+const Index = ({ topBlogs, recentBlogs }) => {
+	console.log(topBlogs, recentBlogs)
+
 	return (
-		<div>
+		<>
 			<BlogPreviewList />
-		</div>
+		</>
 	)
 }
 
 export const getStaticProps = async () => {
+	await connectDB()
+
 	const fileNames = getFiles('blog')
 
 	const allParsedData = fileNames.map((fileName) => {
@@ -27,15 +34,57 @@ export const getStaticProps = async () => {
 
 		data.readingTime = readingTime(content).text
 		data.slug = slug
+		data.content = content
 
-		return {
-			data,
-			content,
-		}
+		return data
+	})
+
+	const blogBulkUpdateArray = allParsedData.map((blog) => ({
+		updateOne: {
+			filter: { customID: blog.customID },
+			update: { $set: blog },
+			upsert: true,
+			setDefaultsOnInsert: true,
+		},
+	}))
+
+	await Blog.bulkWrite(blogBulkUpdateArray)
+
+	const project = {
+		_id: 0,
+		__v: 0,
+		content: 0,
+	}
+
+	const limit = 10
+
+	const topBlogsResult = await Blog.find({}, project)
+		.sort('-totalViews')
+		.limit(limit)
+
+	const recentBlogsResult = await Blog.find({}, project)
+		.sort('-createdAt')
+		.limit(limit)
+
+	const topBlogs = topBlogsResult.map((blog) => {
+		const blogObject = blog.toObject()
+		blogObject.createdAt = blogObject.createdAt.toDateString()
+
+		return blogObject
+	})
+
+	const recentBlogs = recentBlogsResult.map((blog) => {
+		const blogObject = blog.toObject()
+		blogObject.createdAt = blogObject.createdAt.toDateString()
+
+		return blogObject
 	})
 
 	return {
-		props: {},
+		props: {
+			topBlogs,
+			recentBlogs,
+		},
 	}
 }
 
