@@ -7,8 +7,11 @@ import Blog from 'mongoose/Models/Blog'
 import connectDB from 'mongoose/connectDB'
 
 const BlogPage = ({ mdxSource }) => {
-	console.log(mdxSource)
-	return <h1>BlogPage</h1>
+	return (
+		<>
+			<MDXRemote {...mdxSource} />
+		</>
+	)
 }
 
 export const getStaticProps = async ({ params: { slug } }) => {
