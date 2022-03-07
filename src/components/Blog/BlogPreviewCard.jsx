@@ -18,46 +18,44 @@ import ChakraNextLink, {
 	ChakraTextLink,
 } from '@/components/Links/ChakraLink'
 
-const BlogPreviewCard = () => {
+const BlogPreviewCard = ({
+	banner,
+	title,
+	description,
+	slug,
+	altText,
+	createdAt,
+	readingTime,
+	totalViews,
+}) => {
+	const link = `/blog/${slug}`
+
 	return (
 		<VStack as={LinkBox} spacing='1rem' align='start' mb='2rem'>
 			<Box w='100%'>
 				<Image
-					src='/tw_2.jpg'
+					src={banner}
 					width={16}
 					height={9}
 					layout='responsive'
-					alt=''
+					alt={altText}
 					objectFit='cover'
 				/>
 			</Box>
 
-			<ChakraNextLink ChakraComponent={Heading} href='/adf' overlay>
-				lorem ipsum dolor sit amet consectetur adipisicing elit.
+			<ChakraNextLink ChakraComponent={Heading} href={link} overlay>
+				{title}
 			</ChakraNextLink>
 
-			<HStack textTransform='uppercase'>
-				<ChakraTextLink href='#'>Category</ChakraTextLink>
-
-				{[new Date().toDateString(), '123 views', '3 min read'].map((item) => (
-					<Text key={nanoid()}>{item}</Text>
-				))}
+			<HStack spacing='1rem' wrap='wrap' textTransform='uppercase'>
+				<Text>{createdAt}</Text>
+				<Text>{totalViews} views</Text>
+				<Text>{readingTime}</Text>
 			</HStack>
 
-			<Text noOfLines={3}>
-				Lorem quos optio facilis hic id ullam. Dignissimos natus earum officiis
-				repellendus deserunt magnam Blanditiis saepe recusandae nisi nobis fugiat
-				Repellendus itaque odit expedita eos nam! Dolore minus voluptas ipsa
-				perferendis nam Id quam quia soluta minima voluptate beatae Possimus
-				temporibus corporis quod illo tempore nobis! Aut quisquam minima vel
-				distinctio alias. Quam ipsa at excepturi doloribus voluptate Dignissimos
-				maiores illum ipsum laboriosam rem? Est magni neque perspiciatis rerum hic
-				nesciunt. Velit at blanditiis odit eum fuga Voluptas minus rerum ea quas vel
-				at. Adipisci est quibusdam architecto eos sequi? Quas eveniet vel ea ad
-				voluptatibus! Eos similique aliquam maiores.
-			</Text>
+			<Text noOfLines={3}>{description}</Text>
 
-			<ChakraButtonLink href='/' justifyContent='center'>
+			<ChakraButtonLink href={link} justifyContent='center'>
 				Read More
 			</ChakraButtonLink>
 		</VStack>

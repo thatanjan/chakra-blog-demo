@@ -11,11 +11,9 @@ import Blog from '@/mongoose/Models/Blog'
 import connectDB from '@/mongoose/connectDB'
 
 const Index = ({ topBlogs, recentBlogs }) => {
-	console.log(topBlogs, recentBlogs)
-
 	return (
 		<>
-			<BlogPreviewList />
+			<BlogPreviewList blogs={topBlogs} />
 		</>
 	)
 }
