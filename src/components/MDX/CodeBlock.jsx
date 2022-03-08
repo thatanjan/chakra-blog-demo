@@ -4,14 +4,20 @@ import React from 'react'
 import Highlight, { defaultProps } from 'prism-react-renderer'
 import vsDark from 'prism-react-renderer/themes/vsDark'
 
-const CodeBlock = ({ children, className }) => {
+const CodeBlock = ({ children }) => {
+	if (!children) return null
+
+	const {
+		props: { className, children: code = '' },
+	} = children
+
 	const language = className ? className.replace(/language-/, '') : ''
 
 	return (
 		<Highlight
 			{...defaultProps}
 			theme={vsDark}
-			code={children.trim()}
+			code={code.trim()}
 			language={language}
 		>
 			{({ className, style, tokens, getLineProps, getTokenProps }) => (
