@@ -1,9 +1,11 @@
 import { Heading, Text, Code } from '@chakra-ui/react'
 import Image from 'next/image'
-import { YouTube } from 'mdx-embed'
+import { YouTube, Gist, CodePen, CodeSandbox } from 'mdx-embed'
 
 import { ChakraTextLink } from '@/components/Links/ChakraLink'
 import CodeBlock from './CodeBlock'
+
+import Tweet from './Tweet'
 
 const components = {
 	// custom
@@ -13,8 +15,12 @@ const components = {
 
 	// embed components
 	YouTube,
+	Gist,
+	CodePen,
+	CodeSandbox,
 
 	// chakra components
+	Tweet,
 }
 
 ;(() => {
@@ -33,5 +39,7 @@ const components = {
 components.p = (props) => <Text fontSize={['md', 'lg', 'xl']} {...props} />
 
 components.code = (props) => <Code fontSize={['md', 'lg', 'xl']} {...props} />
+
+// For Embed
 
 export default components
