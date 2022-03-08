@@ -6,10 +6,15 @@ import { MDXRemote } from 'next-mdx-remote'
 import Blog from 'mongoose/Models/Blog'
 import connectDB from 'mongoose/connectDB'
 
-const BlogPage = ({ mdxSource }) => {
+import BlogHead from '@/components/Blog/BlogHead'
+
+import MDXComponents from 'components/MDX/MDXComponents'
+
+const BlogPage = ({ mdxSource, blogData }) => {
 	return (
 		<>
-			<MDXRemote {...mdxSource} />
+			<BlogHead {...blogData} />
+			<MDXRemote {...mdxSource} components={MDXComponents} />
 		</>
 	)
 }
