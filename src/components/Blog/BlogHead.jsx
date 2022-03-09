@@ -17,6 +17,8 @@ import ChakraNextLink, {
 	ChakraTextLink,
 } from '@/components/Links/ChakraLink'
 
+import useGetViews from 'hooks/useGetViews'
+
 const BlogHead = ({
 	banner,
 	title,
@@ -25,7 +27,10 @@ const BlogHead = ({
 	createdAt,
 	readingTime,
 	totalViews,
+	customID,
 }) => {
+	const { data: views } = useGetViews(customID, totalViews)
+
 	return (
 		<>
 			<VStack as={LinkBox} spacing='1rem' align='center' m='2rem 0'>
@@ -44,7 +49,7 @@ const BlogHead = ({
 
 				<HStack spacing='1rem' wrap='wrap' textTransform='uppercase'>
 					<Text>{createdAt}</Text>
-					<Text>{totalViews} views</Text>
+					<Text>{views} views</Text>
 					<Text>{readingTime}</Text>
 				</HStack>
 
