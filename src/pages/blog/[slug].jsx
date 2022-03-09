@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import Image from 'next/image'
 
 import { serialize } from 'next-mdx-remote/serialize'
 import { MDXRemote } from 'next-mdx-remote'
