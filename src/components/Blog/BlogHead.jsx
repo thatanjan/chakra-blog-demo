@@ -1,21 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Image from 'next/image'
+import axios from 'axios'
 
-import {
-	Flex,
-	Box,
-	HStack,
-	VStack,
-	Text,
-	Heading,
-	LinkBox,
-	LinkOverlay,
-} from '@chakra-ui/react'
-
-import ChakraNextLink, {
-	ChakraButtonLink,
-	ChakraTextLink,
-} from '@/components/Links/ChakraLink'
+import { Box, HStack, VStack, Text, Heading, LinkBox } from '@chakra-ui/react'
 
 import useGetViews from 'hooks/useGetViews'
 
@@ -29,7 +16,25 @@ const BlogHead = ({
 	totalViews,
 	customID,
 }) => {
-	const { data: views } = useGetViews(customID, totalViews)
+	const { data: views, mutate } = useGetViews(customID, totalViews)
+
+	useEffect(() => {
+		const cancelTokenSource = axios.CancelToken.source()
+
+		;(async () => {
+			try {
+				await axios.post(`/api/views/${customID}`, {
+					cancelToken: cancelTokenSource.token,
+				})
+
+				mutate()
+			} catch (_) {}
+		})()
+		return () => {
+			cancelTokenSource.cancel()
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
 	return (
 		<>
@@ -53,7 +58,7 @@ const BlogHead = ({
 					<Text>{readingTime}</Text>
 				</HStack>
 
-				<Text noOfLines={3}>{description}</Text>
+				<Text>{description}</Text>
 			</VStack>
 		</>
 	)
