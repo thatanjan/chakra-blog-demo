@@ -18,6 +18,8 @@ import ChakraNextLink, {
 	ChakraTextLink,
 } from '@/components/Links/ChakraLink'
 
+import useGetViews from 'hooks/useGetViews'
+
 const BlogPreviewCard = ({
 	banner,
 	title,
@@ -27,8 +29,11 @@ const BlogPreviewCard = ({
 	createdAt,
 	readingTime,
 	totalViews,
+	customID,
 }) => {
 	const link = `/blog/${slug}`
+
+	const { data: views } = useGetViews(customID, totalViews)
 
 	return (
 		<VStack as={LinkBox} spacing='1rem' align='start' mb='2rem'>
@@ -49,7 +54,7 @@ const BlogPreviewCard = ({
 
 			<HStack spacing='1rem' wrap='wrap' textTransform='uppercase'>
 				<Text>{createdAt}</Text>
-				<Text>{totalViews} views</Text>
+				<Text>{views} views</Text>
 				<Text>{readingTime}</Text>
 			</HStack>
 
