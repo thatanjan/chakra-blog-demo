@@ -10,6 +10,7 @@ const CustomIconButton = ({ Icon, ...props }) => {
 }
 
 const AppDrawer = dynamic(() => import('@/components/Drawers/AppDrawer'))
+const Search = dynamic(() => import('@/components/Inputs/Search'))
 
 const HamburgerNav = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure()
@@ -18,6 +19,17 @@ const HamburgerNav = () => {
 			<CustomIconButton Icon={HamburgerIcon} onClick={onOpen} />
 
 			{isOpen && <AppDrawer isOpen={isOpen} onClose={onClose} />}
+		</>
+	)
+}
+
+const SearchButton = () => {
+	const { onOpen, ...others } = useDisclosure()
+
+	return (
+		<>
+			<IconButton size='lg' icon={<SearchIcon />} ml='1rem' onClick={onOpen} />
+			<Search {...others} />
 		</>
 	)
 }
@@ -34,7 +46,7 @@ const AppHeader = () => {
 				<Flex alignItems='center'>
 					<Logo />
 					<Spacer />
-					<CustomIconButton Icon={SearchIcon} />
+					<SearchButton />
 					<HamburgerNav />
 				</Flex>
 			</Box>
