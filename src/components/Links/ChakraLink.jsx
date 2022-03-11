@@ -12,6 +12,7 @@ const ChakraNextLink = ({
 	ChakraComponent,
 	href,
 	children,
+	chakraLinkProps,
 	overlay = false,
 	...props
 }) => {
@@ -19,9 +20,9 @@ const ChakraNextLink = ({
 
 	return (
 		<Link href={href} passHref>
-			<ChakraComponent as={LinkComponent} {...props}>
-				{children}
-			</ChakraComponent>
+			<LinkComponent {...chakraLinkProps}>
+				<ChakraComponent {...props}>{children}</ChakraComponent>
+			</LinkComponent>
 		</Link>
 	)
 }
