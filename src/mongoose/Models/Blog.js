@@ -5,19 +5,16 @@ const stringRequired = {
 	required: true,
 }
 
-const stringRequiredIndexed = { ...stringRequired, text: true }
-
 const schema = new Schema({
-	title: stringRequiredIndexed,
-	description: stringRequiredIndexed,
+	title: stringRequired,
+	description: stringRequired,
 	slug: stringRequired,
 	createdAt: {
 		type: Date,
 		default: Date.now,
 	},
-	content: stringRequiredIndexed,
+	content: stringRequired,
 	totalViews: { type: Number, default: 0 },
-	category: stringRequiredIndexed,
 	banner: stringRequired,
 	altText: stringRequired,
 	readingTime: stringRequired,
