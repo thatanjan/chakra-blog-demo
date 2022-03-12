@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Highlight, { defaultProps } from 'prism-react-renderer'
 import vsDark from 'prism-react-renderer/themes/vsDark'
 
-import { Button, Flex } from '@chakra-ui/react'
+import { Button, Flex, Box, chakra } from '@chakra-ui/react'
 
 const CodeBlock = ({ children }) => {
 	const [codeCopied, setCodeCopied] = useState(false)
@@ -35,28 +35,43 @@ const CodeBlock = ({ children }) => {
 		>
 			{({ className, style, tokens, getLineProps, getTokenProps }) => (
 				<>
-					<pre
-						className={className}
-						style={{
-							...style,
-							padding: '30px',
-							overflowX: 'auto',
+					<Box
+						sx={{
+							position: 'relative',
 						}}
 					>
-						<Flex justifyContent='end'>
-							<Button textTransform='uppercase' onClick={handleCopy}>
+						<chakra.pre
+							className={className}
+							sx={{
+								...style,
+								p: 8,
+								overflowX: 'auto',
+								pt: 16,
+							}}
+						>
+							<Button
+								sx={{
+									position: 'absolute',
+									top: 4,
+									right: 4,
+								}}
+								textTransform='uppercase'
+								onClick={handleCopy}
+								size='sm'
+								colorScheme='teal'
+							>
 								{codeCopied ? 'Copied' : 'Copy'}
 							</Button>
-						</Flex>
 
-						{tokens.map((line, i) => (
-							<div key={i} {...getLineProps({ line, key: i })}>
-								{line.map((token, key) => (
-									<span key={key} {...getTokenProps({ token, key })} />
-								))}
-							</div>
-						))}
-					</pre>
+							{tokens.map((line, i) => (
+								<div key={i} {...getLineProps({ line, key: i })}>
+									{line.map((token, key) => (
+										<span key={key} {...getTokenProps({ token, key })} />
+									))}
+								</div>
+							))}
+						</chakra.pre>
+					</Box>
 				</>
 			)}
 		</Highlight>
