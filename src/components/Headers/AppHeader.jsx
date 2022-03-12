@@ -4,6 +4,7 @@ import { Flex, Spacer, Box, IconButton, useDisclosure } from '@chakra-ui/react'
 import { HamburgerIcon, SearchIcon } from '@chakra-ui/icons'
 
 import Logo from '@/components/Logos/Logo'
+import ChakraLink from 'components/Links/ChakraLink'
 
 const CustomIconButton = ({ Icon, ...props }) => {
 	return <IconButton size='lg' icon={<Icon />} ml='1rem' {...props} />
@@ -44,7 +45,9 @@ const AppHeader = () => {
 				px='2rem'
 			>
 				<Flex alignItems='center'>
-					<Logo />
+					<ChakraLink href='/' noOutline>
+						<Logo />
+					</ChakraLink>
 					<Spacer />
 					<SearchButton />
 					<HamburgerNav />
