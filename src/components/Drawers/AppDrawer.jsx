@@ -11,11 +11,12 @@ import {
 	DrawerCloseButton,
 	List,
 	ListItem,
+	Heading,
 } from '@chakra-ui/react'
 
-import { ChakraTextLink } from '@/components/Links/ChakraLink'
+import ChakraLink from '@/components/Links/ChakraLink'
 
-const DrawerList = () => {
+const DrawerList = ({ onClose }) => {
 	const listItems = [
 		{
 			name: 'Home',
@@ -36,22 +37,27 @@ const DrawerList = () => {
 	]
 
 	return (
-		<List spacing={3}>
+		<List>
 			{listItems.map((item) => (
-				<ChakraTextLink
+				<ChakraLink
 					ChakraComponent={ListItem}
 					href={item.link}
 					key={nanoid()}
 					sx={{
 						display: 'block',
-						'&:hover': {
-							textDecoration: 'none',
+						mt: 5,
+						fontSize: 'lg',
+					}}
+					chakraLinkProps={{
+						_focus: {
+							outline: 0,
 						},
 					}}
 					fontSize={['md', 'lg', 'xl']}
+					onClick={onClose}
 				>
 					{item.name}
-				</ChakraTextLink>
+				</ChakraLink>
 			))}
 		</List>
 	)
@@ -59,14 +65,16 @@ const DrawerList = () => {
 
 const AppDrawer = ({ isOpen, onClose }) => {
 	return (
-		<Drawer isOpen={isOpen} placement='left' onClose={onClose}>
+		<Drawer size='md' isOpen={isOpen} placement='left' onClose={onClose}>
 			<DrawerOverlay />
 			<DrawerContent>
 				<DrawerCloseButton />
-				<DrawerHeader>Cules Blog</DrawerHeader>
+				<DrawerHeader py={8}>
+					<Heading>Cules Blog</Heading>
+				</DrawerHeader>
 
 				<DrawerBody>
-					<DrawerList />
+					<DrawerList onClose={onClose} />
 				</DrawerBody>
 			</DrawerContent>
 		</Drawer>
