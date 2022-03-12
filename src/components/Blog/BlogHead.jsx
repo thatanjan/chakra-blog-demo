@@ -9,7 +9,6 @@ import useGetViews from 'hooks/useGetViews'
 const BlogHead = ({
 	banner,
 	title,
-	description,
 	altText,
 	createdAt,
 	readingTime,
@@ -50,7 +49,15 @@ const BlogHead = ({
 					/>
 				</Box>
 
-				<Heading align='center'>{title}</Heading>
+				<Heading
+					fontSize={{
+						base: '4xl',
+						md: '6xl',
+					}}
+					align='center'
+				>
+					{title}
+				</Heading>
 
 				<HStack spacing='1rem' wrap='wrap' textTransform='uppercase'>
 					<Text>{createdAt}</Text>
