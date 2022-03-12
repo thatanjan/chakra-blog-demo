@@ -13,6 +13,7 @@ const ToggleColorModeButton = () => {
 				icon={colorMode === 'dark' ? <MoonIcon /> : <SunIcon />}
 				size='lg'
 				onClick={toggleColorMode}
+				colorScheme='teal'
 				sx={{
 					position: 'fixed',
 					bottom: '3rem',
