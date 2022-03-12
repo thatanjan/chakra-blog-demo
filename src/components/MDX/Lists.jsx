@@ -1,15 +1,11 @@
-import {
-	List,
-	ListItem,
-	ListIcon,
-	OrderedList,
-	UnorderedList,
-} from '@chakra-ui/react'
+import { ListItem, OrderedList, UnorderedList } from '@chakra-ui/react'
+
+import { BlogText } from './Texts'
 
 const components = {
 	ul: UnorderedList,
 	ol: OrderedList,
-	li: ListItem,
+	li: (props) => <BlogText as={ListItem} {...props} />,
 }
 
 export default components

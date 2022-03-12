@@ -9,16 +9,19 @@ const headings = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
 let length = headings.length
 
 headings.forEach((tag) => {
-	const size = `${length}xl`
+	const fontSize = {
+		base: `${length - 1 || ''}xl`,
+		md: `${length}xl`,
+	}
 
 	components[tag] = (props) => (
-		<Heading as={tag} fontSize={size} {...props} mt={12} mb={6} />
+		<Heading as={tag} fontSize={fontSize} {...props} mt={12} mb={6} />
 	)
 
 	length--
 })
 
-components.p = (props) => (
+export const BlogText = (props) => (
 	<Text
 		fontSize={['md', 'lg', 'xl']}
 		{...props}
@@ -28,6 +31,8 @@ components.p = (props) => (
 		letterSpacing='wide'
 	/>
 )
+
+components.p = BlogText
 
 components.a = (props) => <ChakraTextLink {...props} display='inline' />
 
