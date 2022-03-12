@@ -50,15 +50,13 @@ const BlogHead = ({
 					/>
 				</Box>
 
-				<Heading>{title}</Heading>
+				<Heading align='center'>{title}</Heading>
 
 				<HStack spacing='1rem' wrap='wrap' textTransform='uppercase'>
 					<Text>{createdAt}</Text>
 					<Text>{views} views</Text>
 					<Text>{readingTime}</Text>
 				</HStack>
-
-				<Text>{description}</Text>
 			</VStack>
 		</>
 	)
