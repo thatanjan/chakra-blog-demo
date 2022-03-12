@@ -1,5 +1,7 @@
 import { Heading, Text } from '@chakra-ui/react'
 
+import { ChakraTextLink } from 'components/Links/ChakraLink'
+
 const components = {}
 
 const headings = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
@@ -26,5 +28,7 @@ components.p = (props) => (
 		letterSpacing='wide'
 	/>
 )
+
+components.a = (props) => <ChakraTextLink {...props} display='inline' />
 
 export default components
