@@ -6,6 +6,7 @@ import {
 	Box,
 	LinkOverlay,
 	Heading,
+	useColorMode,
 } from '@chakra-ui/react'
 
 const ChakraNextLink = ({
@@ -40,9 +41,16 @@ const ChakraNextLink = ({
 	)
 }
 
-const ChakraTextLink = (props) => (
-	<ChakraNextLink ChakraComponent={Text} {...props} color='teal.300' />
-)
+const ChakraTextLink = (props) => {
+	const { colorMode } = useColorMode()
+	return (
+		<ChakraNextLink
+			ChakraComponent={Text}
+			{...props}
+			color={`teal.${colorMode === 'light' ? 500 : 300}`}
+		/>
+	)
+}
 
 const ChakraButtonLink = (props) => (
 	<ChakraNextLink ChakraComponent={Button} {...props} noUnderline />
