@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Flex, Spacer, Box, Container, useTheme } from '@chakra-ui/react'
+import { Container } from '@chakra-ui/react'
 
 import AppHeader from '@/components/Headers/AppHeader'
 import ToggleColorModeButton from '@/components/Buttons/ToggleColorModeButton'
@@ -11,7 +11,9 @@ const PageLayout = ({ children }) => {
 		<>
 			<AppHeader />
 
-			<Container maxW='5xl'>{children}</Container>
+			<Container px={4} maxW='5xl'>
+				{children}
+			</Container>
 
 			<Footer />
 
