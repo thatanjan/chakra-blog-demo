@@ -1,6 +1,7 @@
 import React from 'react'
 import matter from 'gray-matter'
 import readingTime from 'reading-time'
+import Head from 'next/head'
 
 import BlogPreviewList from '@/components/Blog/BlogPreviewList'
 
@@ -13,7 +14,11 @@ import connectDB from '@/mongoose/connectDB'
 const Index = ({ topBlogs, recentBlogs }) => {
 	return (
 		<>
-			<BlogPreviewList blogs={topBlogs} />
+			<Head>
+				<title>Cules Blog</title>
+			</Head>
+			<BlogPreviewList blogs={topBlogs} header='top blogs' />
+			<BlogPreviewList blogs={recentBlogs} header='recent blogs' />
 		</>
 	)
 }

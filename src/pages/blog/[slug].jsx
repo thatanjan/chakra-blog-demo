@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import Image from 'next/image'
+import React from 'react'
+import Head from 'next/head'
 
 import { serialize } from 'next-mdx-remote/serialize'
 import { MDXRemote } from 'next-mdx-remote'
@@ -14,6 +14,10 @@ import MDXComponents from 'components/MDX/MDXComponents'
 const BlogPage = ({ mdxSource, blogData }) => {
 	return (
 		<>
+			<Head>
+				<title>{blogData.title}</title>
+			</Head>
+
 			<BlogHead {...blogData} />
 			<MDXRemote {...mdxSource} components={MDXComponents} />
 		</>
